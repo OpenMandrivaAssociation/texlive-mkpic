@@ -6,7 +6,7 @@
 # catalog-version 1.02
 Name:		texlive-mkpic
 Version:	1.02
-Release:	1
+Release:	2
 Summary:	Perl interface to mfpic
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/support/mkpic
@@ -17,7 +17,7 @@ BuildArch:	noarch
 BuildRequires:	texlive-tlpkg
 Requires(pre):	texlive-tlpkg
 Requires(post):	texlive-kpathsea
-Requires:	texlive-mkpic.bin
+Provides:	texlive-mkpic.bin = %{EVRD}
 
 %description
 A Perl interface to mfpic making it possible to enter simple
@@ -35,6 +35,7 @@ file, mkpic.sty, containing one LaTeX command for each picture.
 
 #-----------------------------------------------------------------------
 %files
+%{_bindir}/mkpic
 %{_texmfdistdir}/scripts/mkpic/mkpic
 %doc %{_texmfdistdir}/doc/support/mkpic/README
 %doc %{_texmfdistdir}/doc/support/mkpic/mkpic.pdf
@@ -48,5 +49,9 @@ file, mkpic.sty, containing one LaTeX command for each picture.
 %build
 
 %install
+mkdir -p %{buildroot}%{_bindir}
+pushd %{buildroot}%{_bindir}
+    ln -sf %{_texmfdistdir}/scripts/mkpic/mkpic mkpic
+popd
 mkdir -p %{buildroot}%{_datadir}
 cp -fpar texmf-dist %{buildroot}%{_datadir}
