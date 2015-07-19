@@ -6,7 +6,7 @@
 # catalog-version 1.02
 Name:		texlive-mkpic
 Version:	1.02
-Release:	4
+Release:	5
 Summary:	Perl interface to mfpic
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/support/mkpic
