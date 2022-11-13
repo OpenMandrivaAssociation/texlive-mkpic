@@ -1,18 +1,12 @@
-# revision 33700
-# category Package
-# catalog-ctan /support/mkpic
-# catalog-date 2014-04-27 15:44:26 +0200
-# catalog-license gpl
-# catalog-version 1.02
 Name:		texlive-mkpic
-Version:	1.02
-Release:	6
+Version:	33700
+Release:	1
 Summary:	Perl interface to mfpic
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/support/mkpic
 License:	GPL
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/mkpic.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/mkpic.doc.tar.xz
+Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/mkpic.r%{version}.tar.xz
+Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/mkpic.doc.r%{version}.tar.xz
 BuildArch:	noarch
 BuildRequires:	texlive-tlpkg
 Requires(pre):	texlive-tlpkg
@@ -26,12 +20,12 @@ braces/brackets to design figures. The script produces a style
 file, mkpic.sty, containing one LaTeX command for each picture.
 
 %post
-    %{_sbindir}/texlive.post
+%{_sbindir}/texlive.post
 
 %postun
-    if [ $1 -eq 0 ]; then
+if [ $1 -eq 0 ]; then
 	%{_sbindir}/texlive.post
-    fi
+fi
 
 #-----------------------------------------------------------------------
 %files
@@ -44,14 +38,14 @@ file, mkpic.sty, containing one LaTeX command for each picture.
 
 #-----------------------------------------------------------------------
 %prep
-%setup -c -a0 -a1
+%autosetup -p1 -c -a1
 
 %build
 
 %install
 mkdir -p %{buildroot}%{_bindir}
 pushd %{buildroot}%{_bindir}
-    ln -sf %{_texmfdistdir}/scripts/mkpic/mkpic mkpic
+ln -sf %{_texmfdistdir}/scripts/mkpic/mkpic mkpic
 popd
 mkdir -p %{buildroot}%{_datadir}
 cp -fpar texmf-dist %{buildroot}%{_datadir}
