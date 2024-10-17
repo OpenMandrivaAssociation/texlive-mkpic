@@ -3,7 +3,7 @@ Version:	33700
 Release:	2
 Summary:	Perl interface to mfpic
 Group:		Publishing
-URL:		http://www.ctan.org/tex-archive/support/mkpic
+URL:		https://www.ctan.org/tex-archive/support/mkpic
 License:	GPL
 Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/mkpic.r%{version}.tar.xz
 Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/mkpic.doc.r%{version}.tar.xz
