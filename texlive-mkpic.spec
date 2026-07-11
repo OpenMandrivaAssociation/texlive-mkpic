@@ -1,51 +1,26 @@
-Name:		texlive-mkpic
-Version:	33700
-Release:	2
+%global tl_name mkpic
+%global tl_revision 76483
+
+Name:		texlive-%{tl_name}
+Epoch:		1
+Version:	1.03
+Release:	%{tl_revision}.1
 Summary:	Perl interface to mfpic
 Group:		Publishing
 URL:		https://www.ctan.org/tex-archive/support/mkpic
-License:	GPL
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/mkpic.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/mkpic.doc.r%{version}.tar.xz
+License:	gpl
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/mkpic.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/mkpic.doc.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
-Provides:	texlive-mkpic.bin = %{EVRD}
+BuildSystem:	texlive
+Requires:	texlive(mkpic.bin)
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-A Perl interface to mfpic making it possible to enter simple
-commands with tab separated arguments and without
-braces/brackets to design figures. The script produces a style
-file, mkpic.sty, containing one LaTeX command for each picture.
+mkpic provides an easy interface for making small pictures with mfpic.
+To this end you create an input file consisting of commands, one per
+line, with space separated parameters (or you modify the DATA section of
+the mkpic script, which is used if you run it without an input file).
+For an extensive description see the file mkpicdoc.pdf, which is part of
+the distribution.
 
-%post
-%{_sbindir}/texlive.post
-
-%postun
-if [ $1 -eq 0 ]; then
-	%{_sbindir}/texlive.post
-fi
-
-#-----------------------------------------------------------------------
-%files
-%{_bindir}/mkpic
-%{_texmfdistdir}/scripts/mkpic/mkpic
-%doc %{_texmfdistdir}/doc/support/mkpic/README
-%doc %{_texmfdistdir}/doc/support/mkpic/mkpic.pdf
-%doc %{_texmfdistdir}/doc/support/mkpic/mkpicdoc.pdf
-%doc %{_texmfdistdir}/doc/support/mkpic/mkpicdoc.tex
-
-#-----------------------------------------------------------------------
-%prep
-%autosetup -p1 -c -a1
-
-%build
-
-%install
-mkdir -p %{buildroot}%{_bindir}
-pushd %{buildroot}%{_bindir}
-ln -sf %{_texmfdistdir}/scripts/mkpic/mkpic mkpic
-popd
-mkdir -p %{buildroot}%{_datadir}
-cp -fpar texmf-dist %{buildroot}%{_datadir}
