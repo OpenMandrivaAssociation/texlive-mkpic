@@ -1,5 +1,6 @@
 %global tl_name mkpic
 %global tl_revision 76483
+%global tl_bin_links mkpic:%{_texmfdistdir}/scripts/mkpic/mkpic
 
 Name:		texlive-%{tl_name}
 Epoch:		1
@@ -15,6 +16,8 @@ BuildArch:	noarch
 BuildSystem:	texlive
 Requires:	texlive(mkpic.bin)
 Provides:	texlive(%{tl_name}) = %{tl_revision}
+Provides:	texlive(%{tl_name}.bin) = %{tl_revision}
+Provides:	texlive-%{tl_name}.bin = %{EVRD}
 
 %description
 mkpic provides an easy interface for making small pictures with mfpic.
